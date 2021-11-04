@@ -4,7 +4,7 @@
 ##Description
 This PR provides new functions to use your bitcoin wallet, them allows you to deposit, withdraw and get balance value
 ## Items:
-*Added Deposit function
-*Added Withdraw fucntion
-*Added GetBalance function
-*Tests for concurency usage
+* Added Deposit function
+* Added Withdraw fucntion
+* Added GetBalance function
+* Tests for concurency usage
