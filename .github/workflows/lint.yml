@@ -1,0 +1,46 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+    fgt:
+      - name: Set up fgt
+        run: go get github.com/GeertJohan/fgt
+      - name: Fgt
+        run: fgt gofmt -l ./
+      - name: Tidy
+        run: go mod tidy
+      ################################
+      # Run Linter against code base #
+      ################################
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - Lint:
+      - name: Tidy
+        run: go mod tidy
+      ################################
+      # Run Linter against code base #
+      ################################
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Test
+      run: go test -v ./...
