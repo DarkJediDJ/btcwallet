@@ -1,6 +1,7 @@
-package main
+package btcwallet
 
 import (
+	"strconv"
 	"sync"
 )
 
@@ -10,7 +11,8 @@ type BtcWallet struct {
 	btc float64
 }
 
-func main() {
+func (bw *BtcWallet) PrettyPrint() string {
+	return "Your balance is "+ strconv.FormatFloat(bw.btc, 'E', -1, 64) +"₿"
 }
 
 // GetBalance displays your wallet balance
