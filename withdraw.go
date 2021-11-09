@@ -1,4 +1,4 @@
-package main
+package btcwallet
 
 import (
 	"errors"
@@ -12,7 +12,7 @@ func (bw *BtcWallet) Withdraw(value float64, wg *sync.WaitGroup) error {
 	if value <= 0 {
 		return errors.New("Youre trying to deposit negative or zero value")
 	}
-	if bw.btc-value < 0 {
+	if bw.btc < value {
 		return errors.New("You cant withdraw more mouney then you have")
 	}
 	bw.btc -= value
