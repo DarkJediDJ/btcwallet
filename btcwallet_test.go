@@ -1,6 +1,7 @@
 package btcwallet
 
 import (
+	"fmt"
 	"sync"
 	"testing"
 
@@ -15,7 +16,10 @@ func TestDeposit(t *testing.T) {
 	for i := 0; i < 3; i++ {
 		go func(value float64, wg *sync.WaitGroup) {
 			defer wg.Done()
-			btcwallet.Deposit(value, wg)
+			err := btcwallet.Deposit(value, wg)
+			if err != nil {
+				fmt.Println(err)
+			}
 		}(10.0, &wg)
 	}
 	wg.Wait()
@@ -23,14 +27,20 @@ func TestDeposit(t *testing.T) {
 	wg.Add(1)
 	go func(value float64, wg *sync.WaitGroup) {
 		defer wg.Done()
-		btcwallet.Deposit(value, wg)
+		err := btcwallet.Deposit(value, wg)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}(-10.2, &wg)
 	wg.Wait()
 	assert.Equal(t, 86.4, btcwallet.GetBalance(), "Validation negative numbers")
 	wg.Add(1)
 	go func(value float64, wg *sync.WaitGroup) {
 		defer wg.Done()
-		btcwallet.Deposit(value, wg)
+		err := btcwallet.Deposit(value, wg)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}(0, &wg)
 	wg.Wait()
 	assert.Equal(t, 86.4, btcwallet.GetBalance(), "Validation zero number")
@@ -43,7 +53,10 @@ func TestWithdraw(t *testing.T) {
 	for i := 0; i < 3; i++ {
 		go func(value float64, wg *sync.WaitGroup) {
 			defer wg.Done()
-			btcwallet.Withdraw(value, wg)
+			err := btcwallet.Withdraw(value, wg)
+			if err != nil {
+				fmt.Println(err)
+			}
 		}(10.0, &wg)
 	}
 	wg.Wait()
@@ -51,14 +64,20 @@ func TestWithdraw(t *testing.T) {
 	wg.Add(1)
 	go func(value float64, wg *sync.WaitGroup) {
 		defer wg.Done()
-		btcwallet.Withdraw(value, wg)
+		err := btcwallet.Withdraw(value, wg)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}(-10.2, &wg)
 	wg.Wait()
 	assert.Equal(t, 46.5, btcwallet.GetBalance(), "Validation negative numbers")
 	wg.Add(1)
 	go func(value float64, wg *sync.WaitGroup) {
 		defer wg.Done()
-		btcwallet.Withdraw(value, wg)
+		err := btcwallet.Withdraw(value, wg)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}(0, &wg)
 	wg.Wait()
 	assert.Equal(t, 46.5, btcwallet.GetBalance(), "Validation zero number")
