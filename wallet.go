@@ -11,8 +11,9 @@ type BtcWallet struct {
 	btc float64
 }
 
+// PrettyPrint displays your wallet balance but with some user-friendly style
 func (bw *BtcWallet) PrettyPrint() string {
-	return "Your balance is "+ strconv.FormatFloat(bw.btc, 'E', -1, 64) +"₿"
+	return "Your balance is " + strconv.FormatFloat(bw.btc, 'E', -1, 64) + "₿"
 }
 
 // GetBalance displays your wallet balance
