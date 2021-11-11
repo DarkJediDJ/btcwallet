@@ -10,7 +10,7 @@ func (bw *BtcWallet) Withdraw(value float64, wg *sync.WaitGroup) error {
 	bw.Lock()
 	defer bw.Unlock()
 	if value <= 0 {
-		return errors.New("Youre trying to deposit negative or zero value")
+		return errors.New("Youre trying to withdraw negative or zero value")
 	}
 	if bw.btc < value {
 		return errors.New("You cant withdraw more mouney then you have")

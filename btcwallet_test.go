@@ -84,3 +84,8 @@ func TestWithdraw(t *testing.T) {
 	assert.NotNil(t, btcwallet.Withdraw(100.1, &wg), "Withdraw more bitcoins then user have")
 	assert.Nil(t, btcwallet.Withdraw(1.1, &wg), "Withdraw() should be nil")
 }
+
+func TestPrettyPrint(t *testing.T){
+	btcwallet := BtcWallet{btc: 76.5}
+	assert.Equal(t, "76.5 ₿", btcwallet.PrettyPrint(), "Validation zero number")
+}
